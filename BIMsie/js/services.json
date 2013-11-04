@@ -571,7 +571,7 @@
       {
         "name": "checkin",
         "doc": "Checkin a new model by sending a serialized form",
-        "returnDoc": "An id, which you can use for the getCheckinState method",
+        "returnDoc": "An id, which you can use for the Bimsie1NotificationRegistryInterface.getProgress method",
         "parameters": [
           {
             "name": "poid",
@@ -1803,6 +1803,22 @@
                   "doc": ""
                 },
                 {
+                  "name": "rid",
+                  "type": {
+                    "name": "int",
+                    "simpleName": "int",
+                    "simpleType": "UNKNOWN",
+                    "fields": []
+                  },
+                  "genericType": {
+                    "name": "int",
+                    "simpleName": "int",
+                    "simpleType": "UNKNOWN",
+                    "fields": []
+                  },
+                  "doc": ""
+                },
+                {
                   "name": "start",
                   "type": {
                     "name": "java.util.Date",
@@ -2041,22 +2057,6 @@
                         "doc": ""
                       }
                     ]
-                  },
-                  "doc": ""
-                },
-                {
-                  "name": "rid",
-                  "type": {
-                    "name": "int",
-                    "simpleName": "int",
-                    "simpleType": "UNKNOWN",
-                    "fields": []
-                  },
-                  "genericType": {
-                    "name": "int",
-                    "simpleName": "int",
-                    "simpleType": "UNKNOWN",
-                    "fields": []
                   },
                   "doc": ""
                 },
@@ -2486,6 +2486,16 @@
             }
           },
           {
+            "name": "userToken",
+            "doc": "",
+            "type": {
+              "name": "java.lang.String",
+              "simpleName": "String",
+              "simpleType": "STRING",
+              "fields": []
+            }
+          },
+          {
             "name": "token",
             "doc": "",
             "type": {
@@ -2577,6 +2587,20 @@
             }
           }
         ]
+      },
+      {
+        "name": "loginUserToken",
+        "doc": "",
+        "parameters": [{
+          "name": "token",
+          "doc": "",
+          "type": {
+            "name": "java.lang.String",
+            "simpleName": "String",
+            "simpleType": "STRING",
+            "fields": []
+          }
+        }]
       },
       {
         "name": "logout",
@@ -3214,6 +3238,16 @@
               "name": "java.lang.String",
               "simpleName": "String",
               "simpleType": "STRING",
+              "fields": []
+            }
+          },
+          {
+            "name": "flat",
+            "doc": "",
+            "type": {
+              "name": "java.lang.Boolean",
+              "simpleName": "Boolean",
+              "simpleType": "BOOLEAN",
               "fields": []
             }
           }
@@ -5264,6 +5298,20 @@
         }]
       },
       {
+        "name": "registerNewRevisionHandler",
+        "doc": "",
+        "parameters": [{
+          "name": "endPointId",
+          "doc": "",
+          "type": {
+            "name": "java.lang.Long",
+            "simpleName": "Long",
+            "simpleType": "LONG",
+            "fields": []
+          }
+        }]
+      },
+      {
         "name": "registerNewRevisionOnSpecificProjectHandler",
         "doc": "",
         "parameters": [
@@ -5554,6 +5602,20 @@
         }]
       },
       {
+        "name": "unregisterNewRevisionHandler",
+        "doc": "",
+        "parameters": [{
+          "name": "endPointId",
+          "doc": "",
+          "type": {
+            "name": "java.lang.Long",
+            "simpleName": "Long",
+            "simpleType": "LONG",
+            "fields": []
+          }
+        }]
+      },
+      {
         "name": "unregisterNewRevisionOnSpecificProjectHandler",
         "doc": "",
         "parameters": [
@@ -5715,6 +5777,22 @@
                     "name": "java.lang.String",
                     "simpleName": "String",
                     "simpleType": "STRING",
+                    "fields": []
+                  },
+                  "doc": ""
+                },
+                {
+                  "name": "rid",
+                  "type": {
+                    "name": "int",
+                    "simpleName": "int",
+                    "simpleType": "UNKNOWN",
+                    "fields": []
+                  },
+                  "genericType": {
+                    "name": "int",
+                    "simpleName": "int",
+                    "simpleType": "UNKNOWN",
                     "fields": []
                   },
                   "doc": ""
@@ -5958,22 +6036,6 @@
                         "doc": ""
                       }
                     ]
-                  },
-                  "doc": ""
-                },
-                {
-                  "name": "rid",
-                  "type": {
-                    "name": "int",
-                    "simpleName": "int",
-                    "simpleType": "UNKNOWN",
-                    "fields": []
-                  },
-                  "genericType": {
-                    "name": "int",
-                    "simpleName": "int",
-                    "simpleType": "UNKNOWN",
-                    "fields": []
                   },
                   "doc": ""
                 },
