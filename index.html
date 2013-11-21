@@ -414,12 +414,20 @@ LazyLoad.js([
 		};
 
 		this.makeFieldFromType = function(call, fieldName, type, genericType, doc) {
+			var div = $("<div class=\"form-group\">");
+			var label = $("<label><a>" + fieldName + "</a></label>");
+			label.find("a").attr("title", doc);
+			label.find("a").tooltip();
+			var controls = $("<div class=\"controls\">");
+			div.append(label);
+			div.append(controls);
+			
 			if (type.simpleName == "String") {
 				var input = $("<input type=\"text\" class=\"form-control\"/>");
 				input.addClass("__field" + fieldName);
 				input.keyup(othis.inputChange);
 				input.enterpress(othis.send);
-				return input;
+				controls.append(input);
 			} else if (type.simpleType == "ENUM") {
 				var select = $("<select class=\"form-control\"></select>");
 				select.addClass("__field" + fieldName);
@@ -439,7 +447,7 @@ LazyLoad.js([
 						select.append(option);
 					});
 				});
-				return select;
+				controls.append(select);
 			} else if (type.name.contains("org.bimserver")) {
 				return $("<div>Unimplemented</div>");
 			} else if (type.name.contains("javax.activation.DataHandler")) {
@@ -473,12 +481,22 @@ LazyLoad.js([
 					}
 				});
 				
-				return input;
+				controls.append(input);
 			} else if (type.simpleName == "Boolean") {
-				var input = $("<input type=\"checkbox\" class=\"form-control\" value=\"true\"/>");
+				var input = $("<input type=\"checkbox\" value=\"true\"/>");
 				input.addClass("__field" + fieldName);
 				input.change(othis.inputChange);
-				return input;
+				controls.append(input);
+				
+				var div = $("<div class=\"checkbox\">");
+				var label = $("<label><a>" + fieldName + "</a></label>");
+				label.find("a").attr("title", doc);
+				label.find("a").tooltip();
+				div.append(label);
+				
+				label.append(input);
+				
+				return div;
 			} else if (type.simpleName == "List") {
 				
 			} else {
@@ -486,8 +504,9 @@ LazyLoad.js([
 				input.keyup(othis.inputChange);
 				input.enterpress(othis.send);
 				input.addClass("__field" + fieldName);
-				return input;
+				controls.append(input);
 			}
+			return div;
 		};
 
 		this.loadExampleJson = function(call, serviceInterface, method, container) {
@@ -511,16 +530,7 @@ LazyLoad.js([
 			container.find(".noparameters").hide();
 			container.find(".parameters").show();
 			method.parameters.forEach(function(parameter, index){
-				var div = $("<div class=\"form-group\">");
-				var label = $("<label class=\"control-label\"><a>" + parameter.name + "</a></label>");
-				label.find("a").attr("title", parameter.doc);
-				label.find("a").tooltip();
-				var controls = $("<div class=\"controls\">");
-				div.append(label);
-				div.append(controls);
-				console.log(parameter.type);
-				var input = othis.makeFieldFromType(call, parameter.name, parameter.type, parameter.genericType, parameter.doc);
-				controls.append(input);
+				var div = othis.makeFieldFromType(call, parameter.name, parameter.type, parameter.genericType, parameter.doc);
 				container.find(".parametersForm").append(div);
 			});
 			container.show();
