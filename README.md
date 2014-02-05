@@ -1,4 +1,4 @@
-BIMsie Documentation
+BIMSie Documentation
 ======
 
 Documentation for the BIM Service interface exchange (BIMSie) standard API for BIM in the cloud.
