@@ -1,4 +1,4 @@
-BIMSie Building Information Model Service Interface Exchange
+BIMSie for BIM in the cloud
 ======
 
 The BIM Service interface exchange (BIMSie) standard API for BIM in the cloud.
