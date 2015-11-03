@@ -37,4 +37,9 @@ public class BimsieWebModulePlugin extends AbstractWebModulePlugin {
 	public String getDefaultContextPath() {
 		return "/bimsie";
 	}
+
+	@Override
+	public String getIdentifier() {
+		return "bimsie";
+	}
 }

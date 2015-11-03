@@ -1,10 +1,17 @@
-http://stackoverflow.com/questions/4498866/actual-numbers-to-the-human-readable-values
 var SizePrefixes = ' KMGTPEZYXWVU';
 function GetHumanSize(size) {
   if(size <= 0) return '0';
   var t2 = Math.min(Math.round(Math.log(size)/Math.log(1024)), 12);
   return (Math.round(size * 100 / Math.pow(1024, t2)) / 100) +
     SizePrefixes.charAt(t2).replace(' ', '') + 'B';
+}
+
+function bytesToSize(bytes) {
+	if(bytes == 0) return '0 Byte';
+	var k = 1000;
+	var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+	var i = Math.floor(Math.log(bytes) / Math.log(k));
+	return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
 }
 
 function formatDate(date) {

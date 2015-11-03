@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <title>Console</title>
   <base href="/"></base>
 </head>
 <body>
-	<div class="navbar navbar-static-top navbar-inverse">
-		<div class="navbar-inner">
-			<div class="container-fluid">
-				<a class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a>
-				<ul class="nav">
-					<li><img class="logo"/></li>
-					<!--  <li><a class="pageLink homeLink">Home</a></li>-->
-					<li class="active"><a class="pageLink apiLink">API</a></li>
-					<li><a class="pageLink scenariosLink">Common scenarios</a></li>
-				</ul>
-				<button class="btn btn-default loginButton menuLoginButton pull-right">Login</button>
-				<label class="addressLabel pull-right">Address <input type="text" class="input-xlarge addressInput"/></label>
-			</div>
-		</div>
-	</div>
+	<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+		<ul class="nav navbar-nav">
+			<li><img class="logo" style="margin: 12px"/></li>
+			<li class="active"><a class="pageLink apiLink">API</a></li>
+			<li><a class="pageLink scenariosLink">Common scenarios</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><button class="btn btn-default loginButton menuLoginButton" style="margin-top: 12px">Login</button></li>
+			<li><label class="addressLabel" style="margin-top: 18px">Address</label></li><li><input type="text" style="margin: 10px; margin-right: 30px; width:500px" class="addressInput form-control"/></li>
+		</ul>
+	</nav>
 	<div class="home page">
 	</div>
 	<div class="api page">
-		<div class="container-fluid">
-			<div class="row-fluid">
-				<div class="span2 methodList well">
-					<ul class="innerMethodList nav nav-list"></ul>
+		<div class="container">
+			<div class="row">
+				<div class="methodList">
+					<div class="innerMethodList list-group"></div>
 				</div>
-				<div class="span10 mainDiv">
-					<div class="hero-unit">
+				<div class="mainDiv">
+					<div class="jumbotron">
 						<div class="media">
 							<a class="pull-left" href="#">
 								<img class="largeLogo"/>
@@ -47,37 +41,43 @@
 						</div>
 					</div>
 					<div class="method initialhide">
-						<h3 class="name"></h3>
-						<div class="alert">
-							<span class="label label-info">Description</span>
-							<div class="doc"></div>
-							<div style="margin-top: 8px">
-								<span class="label">Returns</span>
-								<div class="docreturn"></div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title name"></h3>
 							</div>
-						</div>
-						<div class="example">
-							<div class="noparameters initialhide">This call has no parameters</div>
-							<div class="parameters initialhide">
-								<form class="parametersForm form-horizontal">
-								</form>
-							</div>
-							<div class="protocolSelector btn-group" data-toggle="buttons-radio">
-								<button type="button" class="btn btn-default active jsonRadio">JSON</button>
-								<button type="button" class="btn btn-default soapRadio">SOAP</button>
-							</div>
-							<button class="btn btn-primary sendButton">Send</button>
-							<div class="textareas">
-								<div class="requestdiv">
-									Request<br/>
-									<div>
-										<pre class="prettyprint"></pre>
+							<div class="panel-body">
+								<div class="alert">
+									<span class="label label-info">Description</span>
+									<div class="doc"></div>
+									<div style="margin-top: 8px">
+										<span class="label label-default">Returns</span>
+										<div class="docreturn"></div>
 									</div>
 								</div>
-								<div class="responsediv initialhide">
-									Response<br/>
-									<div>
-										<pre class="prettyprint"></pre>
+								<div class="example">
+									<div class="noparameters initialhide">This call has no parameters</div>
+									<div class="parameters initialhide">
+										<form class="parametersForm form-horizontal">
+										</form>
+									</div>
+									<div class="protocolSelector btn-group" data-toggle="buttons-radio">
+										<button type="button" class="btn btn-default active jsonRadio">JSON</button>
+										<button type="button" class="btn btn-default soapRadio">SOAP</button>
+									</div>
+									<button class="btn btn-primary sendButton">Send</button>
+									<div class="textareas">
+										<div class="requestdiv">
+											Request<br/>
+											<div>
+												<pre class="prettyprint"></pre>
+											</div>
+										</div>
+										<div class="responsediv initialhide">
+											Response<br/>
+											<div>
+												<pre class="prettyprint"></pre>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -182,23 +182,24 @@ LazyLoad.js([
     Global.baseJsDir + "vkbeautify.0.99.00.beta.js", 
     Global.baseJsDir + "prettify.js", 
     Global.baseJsDir + "consolesettings.js", 
-    Global.baseJsDir + "jquery-2.0.2.min.js", 
+    Global.baseJsDir + "jquery-2.1.3.min.js", 
     Global.baseJsDir + "jquery.cookie.js", 
     Global.baseJsDir + "jquery.enterpress.js", 
     Global.baseJsDir + "bootstrap.min.js", 
-    Global.baseJsDir + "String.js"
+    Global.baseJsDir + "String.js",
+    Global.baseJsDir + "utils.js"
 ], function () {
 	function Console() {
 		var othis = this;
 		
 		othis.currentScenarioContext = null;
 		
-		if ($.cookie("address") != null) {
-			$(".addressInput").val($.cookie("address"));
+		if ($.cookie("address" + window.document.location.port) != null) {
+			$(".addressInput").val($.cookie("address" + window.document.location.port));
 		}
 		
 		$(".addressInput").change(function(){
-			$.cookie(".address", $(".addressInput").val(), { expires: 31, path: '/' });
+			$.cookie("address" + window.document.location.port, $(".addressInput").val(), { expires: 31, path: '/' });
 		});
 		$(".logo").attr("src", Global.baseDir + "img/consolelogo.png");
 		$(".largeLogo").attr("src", Global.baseDir + "img/consolelogolarge.png");
@@ -258,7 +259,7 @@ LazyLoad.js([
 			}
 		];
 		
-		var token = $.cookie("autologin");
+		var token = $.cookie("autologin" + window.document.location.port);
 		if (token != null) {
 			$(".loginButton").html("Logout");
 		}
@@ -284,7 +285,7 @@ LazyLoad.js([
 
 		this.call = function(requestObject, callback) {
 			$.ajax({
-				url: Global.address + "/json",
+				url: $(".addressInput").val() + "/json",
 				data: JSON.stringify(requestObject),
 				contentType: "application/json",
 				type: "POST",
@@ -293,11 +294,11 @@ LazyLoad.js([
 					if (data.exception == null) {
 						if (requestObject.request != null && requestObject.request.method == "login") {
 							token = data.response.result;
-							$.cookie("autologin", token);
+							$.cookie("autologin" + window.document.location.port, token);
 							$(".loginButton").html("Logout");
 						} else if (requestObject.request != null && requestObject.request.method == "logout") {
 							token = null;
-							$.cookie("autologin", null);
+							$.cookie("autologin" + window.document.location.port, null);
 							$(".loginButton").html("Login");
 						}
 						callback(data);
@@ -324,6 +325,8 @@ LazyLoad.js([
 				example += "\"" + $(".__field" + fieldName).val() + "\"";
 			} else if (type.name.contains("Boolean")) {
 				example += "\"" + $(".__field" + fieldName).is(":checked") + "\"";
+			} else if (type.simpleName == "Set"){
+				example += JSON.stringify($(".__field" + fieldName).val().split(',').map(function(e){ return e.trim(); }).filter(function(e){ return e.length > 0;}));
 			} else if (type.name.contains("javax.activation.DataHandler")) {
 				example += "\"" + $(".__field" + fieldName).data("base64") + "\"";
 			} else if (type.name.contains("org.bimserver")) {
@@ -415,14 +418,22 @@ LazyLoad.js([
 		};
 
 		this.makeFieldFromType = function(call, fieldName, type, genericType, doc) {
+			var div = $("<div class=\"form-group\">");
+			var label = $("<label><a>" + fieldName + "</a></label>");
+			label.find("a").attr("title", doc);
+			label.find("a").tooltip();
+			var controls = $("<div class=\"controls\">");
+			div.append(label);
+			div.append(controls);
+			
 			if (type.simpleName == "String") {
-				var input = $("<input type=\"text\"/>");
+				var input = $("<input type=\"text\" class=\"form-control\"/>");
 				input.addClass("__field" + fieldName);
 				input.keyup(othis.inputChange);
 				input.enterpress(othis.send);
-				return input;
+				controls.append(input);
 			} else if (type.simpleType == "ENUM") {
-				var select = $("<select></select>");
+				var select = $("<select class=\"form-control\"></select>");
 				select.addClass("__field" + fieldName);
 				select.change(othis.inputChange);
 				var request = {
@@ -440,11 +451,11 @@ LazyLoad.js([
 						select.append(option);
 					});
 				});
-				return select;
+				controls.append(select);
 			} else if (type.name.contains("org.bimserver")) {
 				return $("<div>Unimplemented</div>");
 			} else if (type.name.contains("javax.activation.DataHandler")) {
-				var input = $("<input type=\"file\"/>");
+				var input = $("<input class=\"form-control\" type=\"file\"/>");
 				input.addClass("__field" + fieldName);
 				
 				var reader = new FileReader();
@@ -474,26 +485,37 @@ LazyLoad.js([
 					}
 				});
 				
-				return input;
+				controls.append(input);
 			} else if (type.simpleName == "Boolean") {
 				var input = $("<input type=\"checkbox\" value=\"true\"/>");
 				input.addClass("__field" + fieldName);
 				input.change(othis.inputChange);
-				return input;
+				controls.append(input);
+				
+				var div = $("<div class=\"checkbox\">");
+				var label = $("<label><a>" + fieldName + "</a></label>");
+				label.find("a").attr("title", doc);
+				label.find("a").tooltip();
+				div.append(label);
+				
+				label.append(input);
+				
+				return div;
 			} else if (type.simpleName == "List") {
 				
 			} else {
-				var input = $("<input type=\"text\"/>");
+				var input = $("<input type=\"text\" class=\"form-control\"/>");
 				input.keyup(othis.inputChange);
 				input.enterpress(othis.send);
 				input.addClass("__field" + fieldName);
-				return input;
+				controls.append(input);
 			}
+			return div;
 		};
 
 		this.loadExampleJson = function(call, serviceInterface, method, container) {
-			if ($(".hero-unit").is(":visible")) {
-				$(".hero-unit").hide();
+			if ($(".jumbotron").is(":visible")) {
+				$(".jumbotron").hide();
 			}
 			othis.lastCall.serviceInterface = serviceInterface;
 			othis.lastCall.method = method;
@@ -512,16 +534,7 @@ LazyLoad.js([
 			container.find(".noparameters").hide();
 			container.find(".parameters").show();
 			method.parameters.forEach(function(parameter, index){
-				var div = $("<div class=\"form-group\">");
-				var label = $("<label class=\"control-label\"><a>" + parameter.name + "</a></label>");
-				label.find("a").attr("title", parameter.doc);
-				label.find("a").tooltip();
-				var controls = $("<div class=\"controls\">");
-				div.append(label);
-				div.append(controls);
-				console.log(parameter.type);
-				var input = othis.makeFieldFromType(call, parameter.name, parameter.type, parameter.genericType, parameter.doc);
-				controls.append(input);
+				var div = othis.makeFieldFromType(call, parameter.name, parameter.type, parameter.genericType, parameter.doc);
 				container.find(".parametersForm").append(div);
 			});
 			container.show();
@@ -537,20 +550,18 @@ LazyLoad.js([
 			ConsoleSettings.getServiceInterfaces(othis, function(serviceInterfaces){
 				$(".innerMethodList").empty();
 				serviceInterfaces.forEach(function(serviceInterface, index){
-					var headerLi = $("<li class=\"nav-header\">" + serviceInterface.simpleName + "</li>");
+					var headerLi = $("<li class=\"list-group-item header\"><h3>" + serviceInterface.simpleName + "</h3></li>");
 					$(".innerMethodList").append(headerLi);
 					serviceInterface.methods.forEach(function(serviceMethod){
-						var li = $("<li></li>");
-						var a = $("<a>" + serviceMethod.name + "</a>");
+						var a = $("<a class=\"list-group-item\">" + serviceMethod.name + "</a>");
 						a.data("method", serviceMethod);
 						a.data("serviceInterface", serviceInterface);
 						a.click(function(){
-							$(this).parent().parent().find("li").removeClass("active");
-							$(this).parent().addClass("active");
+							$(this).parent().find(".list-group-item").removeClass("active");
+							$(this).addClass("active");
 							othis.loadExampleJson(null, $(this).data("serviceInterface"), $(this).data("method"), $(".method"));
 						});
-						li.append(a);
-						$(".innerMethodList").append(li);
+						$(".innerMethodList").append(a);
 					});
 				});
 			});
@@ -590,11 +601,11 @@ LazyLoad.js([
 				allArguments.push(function(response){
 					if (othis.lastCall.method.name == "login") {
 						token = response.getReturn();
-						$.cookie("autologin", token);
+						$.cookie("autologin" + window.document.location.port, token);
 						$(".loginButton").html("Logout");
 					} else if (othis.lastCall.method.name == "logout") {
 						token = null;
-						$.cookie("autologin", null);
+						$.cookie("autologin" + window.document.location.port, null);
 						$(".loginButton").html("Login");
 					}
 				});
