@@ -25,7 +25,7 @@ public class BimsieWebModulePlugin extends AbstractWebModulePlugin {
 
 	@Override
 	public String getVersion() {
-		return "1.0";
+		return "2.0";
 	}
 
 	@Override
@@ -36,5 +36,10 @@ public class BimsieWebModulePlugin extends AbstractWebModulePlugin {
 	@Override
 	public String getDefaultContextPath() {
 		return "/bimsie";
+	}
+
+	@Override
+	public String getIdentifier() {
+		return "bimsie";
 	}
 }
